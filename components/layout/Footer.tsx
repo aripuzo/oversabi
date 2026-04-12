@@ -47,10 +47,10 @@ export function Footer() {
           <div>
             <h4 className="font-semibold mb-3 text-xs uppercase tracking-wider text-gray-400">Contact</h4>
             <ul className="space-y-2 text-gray-300 text-xs">
-              <li>8 Mafe St, Amuwo-Odofin</li>
+              <li>Megamound Estate, Ojulari Crescent, Ikate-Elegushi</li>
               <li>Lagos, 102102, Nigeria</li>
-              <li>+234 807 777 5777</li>
-              <li>info@oversabistitches.com</li>
+              <li>+234 806 371 2310</li>
+              <li>sabinabisong@gmail.com</li>
             </ul>
           </div>
         </div>
