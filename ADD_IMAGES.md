@@ -55,6 +55,6 @@ Once you have images, update these files:
 ## Sanity CMS Integration
 
 For production, upload images to Sanity Studio:
-1. Go to `/studio` route 
+1. Go to `/studio` route
 2. Upload images to Products and Fabrics
 3. The components will automatically use Sanity-hosted images
