@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 
 const collections = [
   { name: 'Ankara Essentials', href: '/products?category=ankara', bg: 'from-red-800/90 to-red-900/90' },
@@ -11,16 +12,19 @@ const collections = [
 export function Hero() {
   return (
     <section className="relative">
-      {/* Main Hero - Clean navy with subtle pattern */}
-      <div className="relative bg-[#1e3a5f] min-h-[520px]">
-        {/* Subtle diagonal pattern overlay */}
-        <div className="absolute inset-0 opacity-10">
-          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" strokeWidth="0.5"/>
-            </pattern>
-            <rect width="100" height="100" fill="url(#grid)" />
-          </svg>
+      {/* Main Hero - Background image with overlay */}
+      <div className="relative min-h-[520px]">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/hero-dress.png"
+            alt="Bespoke African Fashion"
+            fill
+            className="object-cover"
+            priority
+          />
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-[#1e3a5f]/70" />
         </div>
 
         {/* Content */}
