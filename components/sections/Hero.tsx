@@ -17,14 +17,14 @@ export function Hero() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/hero-dress.png"
+            src="/images/hero-dress.webp"
             alt="Bespoke African Fashion"
             fill
             className="object-cover"
             priority
           />
-          {/* Dark overlay for text readability */}
-          <div className="absolute inset-0 bg-[#1e3a5f]/70" />
+          {/* Subtle gradient overlay - darker on left for text, lighter on right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1e3a5f]/60 via-[#1e3a5f]/20 to-transparent" />
         </div>
 
         {/* Content */}
