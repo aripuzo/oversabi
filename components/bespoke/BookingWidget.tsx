@@ -9,12 +9,6 @@ const timeSlots = [
   '10:00 AM', '2:30 PM', '2:30 PM'
 ]
 
-const tailors = [
-  { name: 'Adwoa Mensah', role: 'African Fashion Mastery', rating: 5, image: null },
-  { name: 'Adwoa Mensah', role: 'African Fashion Mastery', rating: 5, image: null },
-  { name: 'Adwoa Mensah', role: 'African Fashion Mastery', rating: 5, image: null },
-]
-
 const faqs = [
   { q: 'How accurate are your measurements?', a: 'Our measurements are 99% accurate when taken by our professional tailors.' },
   { q: 'Can I reschedule your virtual session?', a: 'Yes, you can reschedule up to 24 hours before your appointment.' },
@@ -98,30 +92,6 @@ export function BookingWidget() {
           >
             Book via WhatsApp
           </Button>
-        </div>
-      </div>
-
-      {/* Meet Our Tailors */}
-      <div>
-        <h3 className="font-semibold text-lg mb-4 text-center">Meet Our Tailors</h3>
-        <div className="grid grid-cols-3 gap-3">
-          {tailors.map((tailor, i) => (
-            <div key={i} className="bg-white rounded-xl shadow-sm p-4 text-center">
-              <div className="w-12 h-12 bg-gray-200 rounded-full mx-auto mb-2" />
-              <h4 className="font-medium text-sm">{tailor.name}</h4>
-              <p className="text-xs text-gray-500">{tailor.role}</p>
-              <div className="flex justify-center gap-0.5 my-1">
-                {Array.from({ length: tailor.rating }).map((_, j) => (
-                  <svg key={j} className="w-3 h-3 text-[#c9a227] fill-current" viewBox="0 0 24 24">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                  </svg>
-                ))}
-              </div>
-              <button className="mt-2 px-3 py-1 bg-adire-blue text-white text-xs rounded-lg">
-                Request
-              </button>
-            </div>
-          ))}
         </div>
       </div>
 
