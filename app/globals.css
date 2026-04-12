@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+:root {
+  --foreground-rgb: 30, 30, 30;
+  --background-rgb: 250, 248, 243;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-adire-blue text-white px-6 py-3 rounded-lg font-medium
+           hover:bg-opacity-90 transition-all duration-200;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-adire-blue text-adire-blue px-6 py-3 rounded-lg
+           font-medium hover:bg-adire-blue hover:text-white transition-all duration-200;
+  }
+
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 xl:px-12 py-16 md:py-24;
+  }
+
+  .heading-xl {
+    @apply text-4xl md:text-5xl lg:text-6xl font-serif font-bold;
+  }
+
+  .heading-lg {
+    @apply text-3xl md:text-4xl font-serif font-semibold;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-adire-blue to-kente-gold bg-clip-text text-transparent;
+  }
+}
