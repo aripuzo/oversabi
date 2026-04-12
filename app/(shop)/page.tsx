@@ -31,13 +31,19 @@ export default async function HomePage() {
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-4 gap-3">
             {[
-              { name: 'Ankara', color: 'bg-red-800' },
+              { name: 'Ankara', image: '/images/fabric-ankara.webp' },
               { name: 'Kente', color: 'bg-yellow-600' },
               { name: 'Aso Oke', color: 'bg-amber-900' },
-              { name: 'Adire', color: 'bg-blue-900' },
+              { name: 'Adire', image: '/images/fabric-adire.webp' },
             ].map((fabric) => (
               <div key={fabric.name} className="text-center">
-                <div className={`aspect-[4/3] ${fabric.color} rounded mb-2`} />
+                <div 
+                  className="aspect-[4/3] rounded mb-2 bg-cover bg-center"
+                  style={{ 
+                    backgroundImage: fabric.image ? `url(${fabric.image})` : undefined,
+                    backgroundColor: fabric.color || undefined
+                  }}
+                />
                 <span className="text-xs text-gray-700">{fabric.name}</span>
               </div>
             ))}
@@ -70,7 +76,7 @@ export default async function HomePage() {
                 name: 'Adire',
                 origin: 'Yoruba Origin',
                 desc: 'Hand-dyed indigo patterns created by skilled artisans.',
-                color: 'bg-blue-900'
+                image: '/images/fabric-adire.webp'
               },
               {
                 name: 'Kente',
@@ -82,11 +88,17 @@ export default async function HomePage() {
                 name: 'Ankara',
                 origin: 'African Wax Print',
                 desc: 'Vibrant, durable cotton for bold expression.',
-                color: 'bg-red-800'
+                image: '/images/fabric-ankara.webp'
               },
             ].map((fabric) => (
               <div key={fabric.name} className="bg-[#2a4a6f] rounded-lg overflow-hidden">
-                <div className={`aspect-[4/3] ${fabric.color}`} />
+                <div 
+                  className="aspect-[4/3] bg-cover bg-center"
+                  style={{ 
+                    backgroundImage: fabric.image ? `url(${fabric.image})` : undefined,
+                    backgroundColor: fabric.color || undefined
+                  }}
+                />
                 <div className="p-4">
                   <p className="text-[10px] uppercase tracking-wider text-gray-400 mb-1">{fabric.origin}</p>
                   <h3 className="text-white font-medium mb-1">{fabric.name}</h3>
