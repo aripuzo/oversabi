@@ -14,16 +14,19 @@ export const SITE = {
   phoneDisplay: '+234 806 371 2310',
   email: 'sabinabisong@gmail.com',
   /**
-   * MUST match the Google Business Profile byte for byte.
-   * Google currently lists: "Chisco, Megamound St, off Kusenla Road,
-   * Ikate, Lekki 106104". This is the website's version. They differ —
-   * pick one, change the other, and use it everywhere.
+   * Confirmed by the owner, Aug 2026. This is the canonical address:
+   * it must appear byte-identical here, in the footer, on the Google
+   * Business Profile and in every directory listing.
+   *
+   * Note the Google listing currently reads "Chisco, Megamound St, off
+   * Kusenla Road, Ikate, Lekki 106104" — that still needs correcting to
+   * match this.
    */
   address: {
-    street: 'Megamound Estate, Ojulari Crescent',
+    street: 'Horizon 1 Estate, Kusenla Road, Lekki Gardens',
     locality: 'Ikate-Elegushi, Lekki',
     region: 'Lagos',
-    postalCode: '102102',
+    postalCode: '106104',
     country: 'NG',
   },
   /**

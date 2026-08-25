@@ -28,6 +28,7 @@ export function Footer() {
               <li><Link href="/products" className="hover:text-white transition-colors">Collection</Link></li>
               <li><Link href="/fabrics" className="hover:text-white transition-colors">Fabrics</Link></li>
               <li><Link href="/bespoke" className="hover:text-white transition-colors">Bespoke</Link></li>
+              <li><Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link></li>
               <li><Link href="/measurements" className="hover:text-white transition-colors">Measurements</Link></li>
             </ul>
           </div>
@@ -36,10 +37,12 @@ export function Footer() {
           <div>
             <h4 className="font-semibold mb-3 text-xs uppercase tracking-wider text-gray-400">Services</h4>
             <ul className="space-y-2 text-gray-300">
-              <li>Bespoke Tailoring</li>
-              <li>Ready-to-Wear</li>
-              <li>Alterations</li>
-              <li>Consultations</li>
+              <li><Link href="/bespoke" className="hover:text-white transition-colors">Bespoke Tailoring</Link></li>
+              <li><Link href="/products" className="hover:text-white transition-colors">Ready-to-Wear</Link></li>
+              <li><Link href="/fabrics/adire" className="hover:text-white transition-colors">Adire</Link></li>
+              <li><Link href="/fabrics/aso-oke" className="hover:text-white transition-colors">Aso Oke</Link></li>
+              <li><Link href="/fabrics/ankara" className="hover:text-white transition-colors">Ankara</Link></li>
+              <li><Link href="/fabrics/kente" className="hover:text-white transition-colors">Kente</Link></li>
             </ul>
           </div>
 
@@ -47,8 +50,8 @@ export function Footer() {
           <div>
             <h4 className="font-semibold mb-3 text-xs uppercase tracking-wider text-gray-400">Contact</h4>
             <ul className="space-y-2 text-gray-300 text-xs">
-              <li>Megamound Estate, Ojulari Crescent, Ikate-Elegushi</li>
-              <li>Lagos, 102102, Nigeria</li>
+              <li>Horizon 1 Estate, Kusenla Road, Lekki Gardens</li>
+              <li>Ikate-Elegushi, Lekki, Lagos, 106104, Nigeria</li>
               <li><a href="tel:+2348063712310" className="hover:text-white">+234 806 371 2310</a></li>
               <li><a href="mailto:sabinabisong@gmail.com" className="hover:text-white">sabinabisong@gmail.com</a></li>
             </ul>

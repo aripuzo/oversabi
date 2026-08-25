@@ -7,6 +7,7 @@ const navLinks = [
   { href: '/products', label: 'Collection' },
   { href: '/fabrics', label: 'Fabrics' },
   { href: '/bespoke', label: 'Bespoke' },
+  { href: '/pricing', label: 'Pricing' },
   { href: '/measurements', label: 'Measurements' },
 ]
 
