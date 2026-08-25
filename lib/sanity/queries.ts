@@ -1,5 +1,23 @@
 import { client } from './client'
 
+/**
+ * Every read goes through here. A Sanity outage, a bad token or a network
+ * blip during `next build` would otherwise fail the whole deploy — pages
+ * handle an empty result gracefully, a failed build helps nobody.
+ */
+async function safeFetch<T>(
+  query: string,
+  params: Record<string, unknown>,
+  fallback: T,
+): Promise<T> {
+  try {
+    return await client.fetch(query, params)
+  } catch (error) {
+    console.error('[sanity] query failed, serving fallback:', error)
+    return fallback
+  }
+}
+
 export interface ProductQueryResult {
   _id: string
   name: string
@@ -34,7 +52,7 @@ export async function getAllProducts(): Promise<ProductQueryResult[]> {
     "mainImage": mainImage.asset->url,
     isNew
   }`
-  return client.fetch(query)
+  return safeFetch(query, {}, [])
 }
 
 export async function getFeaturedProducts(): Promise<ProductQueryResult[]> {
@@ -47,7 +65,7 @@ export async function getFeaturedProducts(): Promise<ProductQueryResult[]> {
     "mainImage": mainImage.asset->url,
     isNew
   }`
-  return client.fetch(query)
+  return safeFetch(query, {}, [])
 }
 
 export async function getNewArrivals(): Promise<ProductQueryResult[]> {
@@ -60,7 +78,7 @@ export async function getNewArrivals(): Promise<ProductQueryResult[]> {
     "mainImage": mainImage.asset->url,
     isNew
   }`
-  return client.fetch(query)
+  return safeFetch(query, {}, [])
 }
 
 export async function getProductBySlug(slug: string): Promise<ProductDetailResult | null> {
@@ -77,7 +95,7 @@ export async function getProductBySlug(slug: string): Promise<ProductDetailResul
     isNew,
     featured
   }`
-  return client.fetch(query, { slug })
+  return safeFetch(query, { slug }, null)
 }
 
 export async function getRelatedProducts(category: string, excludeId: string): Promise<ProductQueryResult[]> {
@@ -90,7 +108,7 @@ export async function getRelatedProducts(category: string, excludeId: string): P
     "mainImage": mainImage.asset->url,
     isNew
   }`
-  return client.fetch(query, { category, excludeId })
+  return safeFetch(query, { category, excludeId }, [])
 }
 
 export async function getFabrics(): Promise<{ _id: string; name: string; origin: string; description: string; characteristics: string[]; image: string }[]> {
@@ -102,5 +120,23 @@ export async function getFabrics(): Promise<{ _id: string; name: string; origin:
     characteristics,
     "image": image.asset->url
   }`
-  return client.fetch(query)
+  return safeFetch(query, {}, [])
+}
+
+/** Slugs + timestamps for the sitemap and for pre-rendering product routes. */
+export async function getAllProductSlugs(): Promise<{ slug: string; _updatedAt: string }[]> {
+  const query = `*[_type == "product" && defined(slug.current)] {
+    "slug": slug.current,
+    _updatedAt
+  }`
+  return safeFetch(query, {}, [])
+}
+
+/** Fabric names for the sitemap, once fabric detail routes exist. */
+export async function getAllFabricSlugs(): Promise<{ slug: string; _updatedAt: string }[]> {
+  const query = `*[_type == "fabric" && defined(slug.current)] {
+    "slug": slug.current,
+    _updatedAt
+  }`
+  return safeFetch(query, {}, [])
 }

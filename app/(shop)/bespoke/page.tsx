@@ -1,15 +1,40 @@
+import type { Metadata } from 'next'
 import { MeasurementGuide } from '@/components/bespoke/MeasurementGuide'
 import { BookingWidget } from '@/components/bespoke/BookingWidget'
+import { FaqJsonLd, BreadcrumbJsonLd } from '@/components/seo/JsonLd'
+import { bespokeFaqs } from '@/lib/content/faqs'
+
+export const metadata: Metadata = {
+  title: 'Bespoke Tailoring in Lagos — Book a Virtual Fitting',
+  description:
+    'Consultation, measurement, fitting, delivery. Book a virtual fitting with our Lekki atelier from anywhere in the world — bespoke agbada, wedding and Ankara pieces.',
+  alternates: { canonical: '/bespoke' },
+  openGraph: {
+    title: 'Bespoke Tailoring in Lagos | Oversabi Stitches',
+    description:
+      'Made-to-measure agbada, wedding and Ankara pieces from our Lekki atelier. Virtual fittings, worldwide shipping.',
+    url: '/bespoke',
+  },
+}
 
 export default function BespokePage() {
   return (
     <div className="section-padding">
+      <FaqJsonLd items={bespokeFaqs} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Bespoke', path: '/bespoke' },
+        ]}
+      />
+
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h1 className="heading-xl mb-4">Bespoke Tailoring</h1>
+          <h1 className="heading-xl mb-4">Bespoke Tailoring in Lagos</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Experience the luxury of made-to-measure fashion. Our master tailors 
-            create garments that fit you perfectly, reflecting your unique style.
+            Made-to-measure agbada, wedding wear and contemporary pieces, cut in our
+            Ikate-Elegushi atelier. Fittings in person in Lekki, or by video from
+            anywhere in the world.
           </p>
         </div>
 

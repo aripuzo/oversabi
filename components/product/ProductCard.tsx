@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface Product {
   _id: string
@@ -25,17 +26,33 @@ const placeholderImages: Record<string, string> = {
 
 export function ProductCard({ product, compact }: ProductCardProps) {
   const placeholder = placeholderImages[product.category] || placeholderImages['Dresses']
+  // Describe the garment and its category — image search is a real channel for
+  // a fashion site, and a decorative background div is invisible to it.
+  const alt = `${product.name} — ${product.category} by Oversabi Stitches`
 
   return (
     <Link href={`/products/${product.slug}`} className="group block">
       <div
         className="relative aspect-[3/4] bg-[#e8e4dc] mb-3 overflow-hidden"
-        style={{
-          backgroundImage: `url("${placeholder}")`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
+        style={
+          product.mainImage
+            ? undefined
+            : {
+                backgroundImage: `url("${placeholder}")`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }
+        }
       >
+        {product.mainImage && (
+          <Image
+            src={product.mainImage}
+            alt={alt}
+            fill
+            sizes={compact ? '(max-width: 768px) 50vw, 25vw' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw'}
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        )}
         {/* Hover overlay */}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
       </div>

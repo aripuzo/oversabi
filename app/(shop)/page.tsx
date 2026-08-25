@@ -1,28 +1,59 @@
+import type { Metadata } from 'next'
 import { Hero } from '@/components/sections/Hero'
 import { ProductGrid } from '@/components/sections/ProductGrid'
-import { getFeaturedProducts, getNewArrivals } from '@/lib/sanity/queries'
+import { getFeaturedProducts } from '@/lib/sanity/queries'
 import Link from 'next/link'
+
+export const revalidate = 3600
+
+export const metadata: Metadata = {
+  // `absolute` stops the layout template appending "| Oversabi Stitches" twice.
+  title: { absolute: 'Oversabi Stitches | Bespoke Tailoring in Lagos, Nigeria' },
+  description:
+    'Lagos atelier making bespoke agbada, wedding dresses and Ankara ready-to-wear. Virtual measurements, worldwide shipping from Ikate-Elegushi, Lekki.',
+  alternates: { canonical: '/' },
+}
 
 export default async function HomePage() {
   const featuredProducts = await getFeaturedProducts()
-  const newArrivals = await getNewArrivals()
-
-  // Sample products matching the mockup
-  const demoProducts = [
-    { _id: '1', name: 'Lagos Wrap Dress', slug: 'lagos-wrap-dress', priceRange: '₦42,500', category: 'Dresses', mainImage: '', isNew: false },
-    { _id: '2', name: 'Abaja Tailored Blazer', slug: 'abaja-blazer', priceRange: '₦42,000', category: 'Blazers', mainImage: '', isNew: false },
-    { _id: '3', name: 'Abaja Tailored Bardollar', slug: 'abaja-bardollar', priceRange: '₦68,000', category: 'Traditional', mainImage: '', isNew: false },
-    { _id: '4', name: 'Abaja Tuxedo low ator', slug: 'abaja-tuxedo', priceRange: '₦68,000', category: 'Formal', mainImage: '', isNew: false },
-  ]
 
   return (
     <div className="bg-[#faf8f3]">
       <Hero />
 
-      {/* Featured Products - Clean grid */}
+      {/* Featured Products.
+          Previously fell back to four hardcoded demo products whose links
+          (/products/lagos-wrap-dress etc.) 404 because they do not exist in
+          Sanity. Publish real products in /studio and this grid fills itself. */}
       <section className="py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <ProductGrid products={featuredProducts.length > 0 ? featuredProducts : demoProducts} />
+          {featuredProducts.length > 0 ? (
+            <ProductGrid products={featuredProducts} />
+          ) : (
+            <div className="max-w-2xl mx-auto text-center py-8">
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                Every piece we make starts as a conversation
+              </h2>
+              <p className="text-sm text-gray-600 mb-6">
+                The new season is being photographed. Until it is up, tell us what
+                you have in mind and we will cut it to your measurements.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Link
+                  href="/bespoke"
+                  className="inline-flex items-center justify-center px-6 py-2.5 bg-[#1e3a5f] text-white text-sm font-semibold rounded hover:bg-opacity-90 transition-all"
+                >
+                  Book a Consultation
+                </Link>
+                <Link
+                  href="/fabrics"
+                  className="inline-flex items-center justify-center px-6 py-2.5 border border-[#1e3a5f] text-[#1e3a5f] text-sm font-semibold rounded hover:bg-[#1e3a5f] hover:text-white transition-all"
+                >
+                  Browse Our Fabrics
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
