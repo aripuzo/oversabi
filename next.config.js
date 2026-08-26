@@ -18,9 +18,8 @@ const nextConfig = {
       { source: '/homepage/:path*', destination: '/', permanent: true },
 
       // /pricing also still ranks ("how much to sew", "tailor price list").
-      // Point it at the bespoke page until a real pricing page exists — then
-      // change this destination to '/pricing' and delete this rule.
-      { source: '/price-list', destination: '/bespoke', permanent: true },
+      { source: '/price-list', destination: '/pricing', permanent: true },
+      { source: '/prices', destination: '/pricing', permanent: true },
 
       // Convenience aliases people type.
       { source: '/collection', destination: '/products', permanent: true },

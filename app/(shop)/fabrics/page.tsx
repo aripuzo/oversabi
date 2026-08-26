@@ -45,7 +45,7 @@ export default async function FabricsPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {fabrics.map((fabric) => (
-            <article key={fabric._id} className="group">
+            <Link key={fabric._id} href={`/fabrics/${fabric.slug}`} className="group block">
               <div className="relative aspect-[4/5] rounded-xl overflow-hidden mb-4 bg-adire-blue/10">
                 {fabric.image ? (
                   <Image
@@ -65,7 +65,9 @@ export default async function FabricsPage() {
                   </span>
                 </div>
               </div>
-              <h2 className="font-serif text-xl font-semibold mb-2">{fabric.name}</h2>
+              <h2 className="font-serif text-xl font-semibold mb-2 group-hover:text-adire-blue transition-colors">
+                {fabric.name}
+              </h2>
               <p className="text-gray-600 text-sm leading-relaxed">{fabric.description}</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {fabric.characteristics?.map((char: string) => (
@@ -74,7 +76,10 @@ export default async function FabricsPage() {
                   </span>
                 ))}
               </div>
-            </article>
+              <span className="mt-3 inline-block text-sm text-adire-blue">
+                Read about {fabric.name} &rarr;
+              </span>
+            </Link>
           ))}
         </div>
 

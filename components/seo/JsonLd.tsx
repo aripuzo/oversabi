@@ -29,7 +29,7 @@ export function OrganizationJsonLd() {
         email: SITE.email,
         image: absoluteUrl(SITE.defaultOgImage),
         logo: absoluteUrl(SITE.defaultOgImage),
-        priceRange: '₦₦₦',
+        ...(SITE.priceRange ? { priceRange: SITE.priceRange } : {}),
         currenciesAccepted: 'NGN',
         paymentAccepted: 'Bank Transfer, Card, Cash',
         address: {
@@ -40,11 +40,17 @@ export function OrganizationJsonLd() {
           postalCode: SITE.address.postalCode,
           addressCountry: SITE.address.country,
         },
-        geo: {
-          '@type': 'GeoCoordinates',
-          latitude: SITE.geo.lat,
-          longitude: SITE.geo.lng,
-        },
+        // Omitted until the real coordinates are read off the Google
+        // Business Profile — a guessed pin is worse than no pin.
+        ...(SITE.geo
+          ? {
+              geo: {
+                '@type': 'GeoCoordinates',
+                latitude: SITE.geo.lat,
+                longitude: SITE.geo.lng,
+              },
+            }
+          : {}),
         areaServed: [
           { '@type': 'City', name: 'Lagos' },
           { '@type': 'Country', name: 'Nigeria' },
@@ -52,14 +58,18 @@ export function OrganizationJsonLd() {
           { '@type': 'Country', name: 'United States' },
         ],
         sameAs: [SITE.social.instagram, SITE.social.facebook],
-        openingHoursSpecification: [
-          {
-            '@type': 'OpeningHoursSpecification',
-            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-            opens: '09:00',
-            closes: '18:00',
-          },
-        ],
+        // Same rule: publish hours only once they are confirmed. Wrong
+        // hours in schema send someone to a shut door on a Saturday.
+        ...(SITE.openingHours
+          ? {
+              openingHoursSpecification: SITE.openingHours.map((slot) => ({
+                '@type': 'OpeningHoursSpecification',
+                dayOfWeek: slot.days,
+                opens: slot.opens,
+                closes: slot.closes,
+              })),
+            }
+          : {}),
         makesOffer: [
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Bespoke Tailoring' } },
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Ready-to-Wear' } },

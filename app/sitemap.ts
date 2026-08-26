@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { SITE } from '@/lib/seo'
 import { getAllProductSlugs } from '@/lib/sanity/queries'
+import { fallbackFabrics } from '@/lib/content/fabrics'
 
 // Re-generate hourly so newly published Sanity products appear without a redeploy.
 export const revalidate = 3600
@@ -16,6 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/bespoke', priority: 0.9, changeFrequency: 'monthly' as const },
     { path: '/fabrics', priority: 0.8, changeFrequency: 'monthly' as const },
     { path: '/measurements', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/pricing', priority: 0.9, changeFrequency: 'monthly' as const },
   ].map(({ path, priority, changeFrequency }) => ({
     url: `${SITE.url}${path}`,
     lastModified: now,
@@ -31,5 +33,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
-  return [...staticRoutes, ...productRoutes]
+  const fabricRoutes: Route[] = fallbackFabrics.map(({ slug }) => ({
+    url: `${SITE.url}/fabrics/${slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }))
+
+  return [...staticRoutes, ...fabricRoutes, ...productRoutes]
 }

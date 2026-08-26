@@ -3,10 +3,19 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
+/**
+ * These pointed at /products?category=ankara etc. — query-param URLs that
+ * Google crawls as near-duplicates of /products, and which filtered a
+ * catalogue that has nothing in it yet. Until there are products to
+ * filter, send people to pages that actually answer the click.
+ *
+ * When the Sanity catalogue is populated, swap these back to real
+ * category routes (/products/category/ankara) rather than query params.
+ */
 const collections = [
-  { name: 'Ankara Essentials', href: '/products?category=ankara', bg: 'from-red-800/90 to-red-900/90' },
-  { name: 'Wedding Collection', href: '/products?category=wedding', bg: 'from-amber-700/90 to-amber-800/90' },
-  { name: "Men's Agbada", href: '/products?category=agbada', bg: 'from-blue-900/90 to-blue-950/90' },
+  { name: 'Ankara Essentials', href: '/fabrics/ankara', bg: 'from-red-800/90 to-red-900/90' },
+  { name: 'Wedding Collection', href: '/bespoke', bg: 'from-amber-700/90 to-amber-800/90' },
+  { name: "Men's Agbada", href: '/fabrics/aso-oke', bg: 'from-blue-900/90 to-blue-950/90' },
 ]
 
 export function Hero() {
@@ -18,7 +27,7 @@ export function Hero() {
         <div className="absolute inset-0">
           <Image
             src="/images/hero-dress.webp"
-            alt="Bespoke African Fashion"
+            alt="Model wearing a bespoke Ankara dress made by Oversabi Stitches in Lagos"
             fill
             className="object-cover"
             priority
@@ -30,11 +39,9 @@ export function Hero() {
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">
           <div className="max-w-xl">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 leading-tight">
-              Bespoke African
-            </h1>
+            {/* One h1 per page. This was previously split across two. */}
             <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
-              <span className="text-white">Fashion,</span>
+              <span className="text-white">Bespoke African Fashion,</span>
               <br />
               <span className="text-[#c9a227]">Crafted for You</span>
             </h1>

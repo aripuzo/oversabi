@@ -13,14 +13,37 @@ export const SITE = {
   phone: '+2348063712310',
   phoneDisplay: '+234 806 371 2310',
   email: 'sabinabisong@gmail.com',
+  /**
+   * Confirmed by the owner, Aug 2026. This is the canonical address:
+   * it must appear byte-identical here, in the footer, on the Google
+   * Business Profile and in every directory listing.
+   *
+   * Note the Google listing currently reads "Chisco, Megamound St, off
+   * Kusenla Road, Ikate, Lekki 106104" — that still needs correcting to
+   * match this.
+   */
   address: {
-    street: 'Megamound Estate, Ojulari Crescent',
+    street: 'Horizon 1 Estate, Kusenla Road, Lekki Gardens',
     locality: 'Ikate-Elegushi, Lekki',
     region: 'Lagos',
-    postalCode: '102102',
+    postalCode: '106104',
     country: 'NG',
   },
-  geo: { lat: 6.4396, lng: 3.4756 },
+  /**
+   * UNVERIFIED — leave null until confirmed, do not guess.
+   * Wrong hours in structured data send customers to a closed door;
+   * wrong coordinates put your pin on someone else's street.
+   * Get the exact values from the Google Business Profile listing,
+   * then fill these in and they appear in the schema automatically.
+   */
+  geo: null as { lat: number; lng: number } | null,
+  openingHours: null as {
+    days: string[]
+    opens: string
+    closes: string
+  }[] | null,
+  /** Schema.org price indicator. Set once the pricing page exists. */
+  priceRange: null as string | null,
   social: {
     instagram: 'https://instagram.com/oversabistitches',
     facebook: 'https://www.facebook.com/oversabistitches/',
